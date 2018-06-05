@@ -7,7 +7,7 @@ const errorHandler = require("./handlers/error");
 const authRoutes = require("./routes/auth");
 const messagesRoutes = require("./routes/messages");
 const { loginRequired, ensureCorrectUser } = require("./middleware/auth");
-
+const db = require("./models");
 
 const PORT = 8081;
 
@@ -29,9 +29,9 @@ app.get("/api/messages", loginRequired, async function(req,res,next){
 				username: true,
 				profileImageUrl: true
 			});
-		return res.status(200).json(message);
+		return res.status(200).json(messages);
 	} catch(err) {
- 		return next(err)
+ 		return next(err);
  	}
 });
 
